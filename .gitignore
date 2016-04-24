@@ -2,3 +2,5 @@
 __pycache__/*
 *.pyc
 *.sw?
+play-server-venv
+play-server-venv/*
