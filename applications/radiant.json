@@ -1,0 +1,11 @@
+{ 
+	"name": "Radiant Player",
+	"commands": {
+		"playpause": "playpause",
+		"next": "next track",
+		"previous": "back track",
+		"currentsong": "get current song name",
+		"currentalbum": "get current song album",
+		"currentartist": "get current song artist"
+	}
+}
