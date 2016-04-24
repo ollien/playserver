@@ -10,7 +10,7 @@ currentApplication = "radiant"
 def getCurrentConfig():
 	return applicationConfigs[currentApplication]
 
-def executeCommand(command):
+def _executeCommand(command):
 	config = getCurrentConfig()
 	fullCommand = "tell application \"{}\" to {}".format(config["name"],
 		config["commands"][command])
