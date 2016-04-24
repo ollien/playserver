@@ -14,6 +14,4 @@ def _executeCommand(command):
 	config = getCurrentConfig()
 	fullCommand = "tell application \"{}\" to {}".format(config["name"],
 		config["commands"][command])
-	result = osascript.osascript(fullCommand)
-	#Return the return code of the command - 0 if succuessful.
-	return result[0]
+	return osascript.osascript(fullCommand)
