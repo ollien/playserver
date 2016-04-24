@@ -2,4 +2,4 @@
 from playserver import webserver
 
 if __name__ == "__main__":
-	webserver.app.run(host = "192.168.0.0")
+	webserver.app.run(host = "0.0.0.0")
