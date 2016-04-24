@@ -1,15 +1,19 @@
 import flask
 import json
+import os.path
 from . import track
 
-app = flask.Flask(__name__)
+TEMPLATE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../templates"))
+STATIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../static"))
+
+app = flask.Flask(__name__, template_folder = TEMPLATE_PATH, static_folder = STATIC_PATH)
 
 @app.route("/")
 def root():
 	song = track.getCurrentSong()
 	artist = track.getCurrentArtist()
 	album = track.getCurrentAlbum()
-	return "{} by {} - {}".format(song, artist, album)
+	return flask.render_template("index.html")
 
 @app.route("/get_song_info")
 def getSongInfo():
