@@ -1,5 +1,5 @@
 import flask
-import track
+from . import track
 
 app = flask.flask(__name__)
 
