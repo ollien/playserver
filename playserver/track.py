@@ -1,7 +1,7 @@
-import configmanager
 import osascript
+from . import configmanager
 
-APP_CONFIG_PATH = "../applications/"
+APP_CONFIG_PATH = "applications/"
 
 applicationConfigs = configmanager.ConfigManager(APP_CONFIG_PATH)
 #TODO: Make this user choosable
