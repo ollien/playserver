@@ -1,32 +1,47 @@
 from threading import Timer
 from . import track
 
-listeners = []
-CHECK_INTERVAL = 5
+_listeners = []
 
-def _checkSongGenerator():
-	while True:
-		currentSong = ""
-		currentArtist = ""
-		currentAlbum = ""
-		if (song != currentSong or artist != currentArtist 
-			or album != currentAlbum):
-			currentSong = song
-			currentArtist = artist
-			currentAlbum = album
-		_callListeners()
-		yield
+class TrackChecker():
+	def __init__(self, interval = 5):
+		self.listeners = []
+		self.CHECK_INTERVAL = interval
+		self._generator = self._checkSongGenerator()
+		self.timer = None
 
-def checkSong():
-	next(_generator)
+	def _checkSongGenerator(self):
+		while True:
+			currentSong = ""
+			currentArtist = ""
+			currentAlbum = ""
+			song = track.getCurrentSong()
+			artist = track.getCurrentArtist()
+			album = track.getCurrentAlbum()
 
-def registerListener(function):
-	listeners.append(function)
+			if (song != currentSong or artist != currentArtist 
+				or album != currentAlbum):
+				currentSong = song
+				currentArtist = artist
+				currentAlbum = album
+				self._callListeners()
+			yield
 
-def _callListeners():
-	for listener in listeners:
-		listener()
+	def checkSong(self):
+		next(self._generator)
+		if self.timer != None:
+			self.startTimer()
 
-#Must be after function declaration in order to work
-_generator = _checkSongGenerator()
-timer = Timer(CHECK_INTERVAL, checkSong)
+	def registerListener(self, function):
+		_listeners.append(function)
+
+	def _callListeners(self):
+		for listener in _listeners:
+			listener()
+
+	def startTimer(self):
+		self.timer = Timer(self.CHECK_INTERVAL, self.checkSong)
+		self.timer.start()
+
+	def cancelTimer(self):
+		self.timer.cancel()
