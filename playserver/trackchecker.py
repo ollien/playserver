@@ -1,32 +1,32 @@
 from threading import Timer
-import track
+from . import track
 
+listeners = []
+CHECK_INTERVAL = 5
 
-class TrackChecker():
-
-	currentSong = ""
-	currentArtist = ""
-	currentAlbum = ""
-	timer = Timer(interval, checkSong)
-	listeners = []
-
-	@staticmethod
-	def checkSong():
-		song = track.getCurrentSong()
-		artist = track.getCurrentArtist()
-		album = track.getCurrentAlbum()
+def _checkSongGenerator():
+	while True:
+		currentSong = ""
+		currentArtist = ""
+		currentAlbum = ""
 		if (song != currentSong or artist != currentArtist 
 			or album != currentAlbum):
 			currentSong = song
 			currentArtist = artist
 			currentAlbum = album
 		_callListeners()
+		yield
 
-	@staticmethod
-	def registerListener(func):
-		listeners.append(func)	
+def checkSong():
+	next(_generator)
 
-	@staticmethod
-	def _callListeners():
-		for listener in listeners:
-			listener(currentSong, currentArtist, currentAlbum)
+def registerListener(function):
+	listeners.append(function)
+
+def _callListeners():
+	for listener in listeners:
+		listener()
+
+#Must be after function declaration in order to work
+_generator = _checkSongGenerator()
+timer = Timer(CHECK_INTERVAL, checkSong)
