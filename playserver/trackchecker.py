@@ -36,6 +36,7 @@ class TrackChecker():
 
 	def startTimer(self):
 		self.timer = Timer(self.CHECK_INTERVAL, self.checkSong)
+		timer.daemon = True
 		self.timer.start()
 
 	def cancelTimer(self):
