@@ -7,28 +7,23 @@ class TrackChecker():
 	def __init__(self, interval = 5):
 		self.listeners = []
 		self.CHECK_INTERVAL = interval
-		self._generator = self._checkSongGenerator()
+		self.currentSong = ""
+		self.currentArtist = ""
+		self.currentAlbum = ""
 		self.timer = None
 
-	def _checkSongGenerator(self):
-		while True:
-			currentSong = ""
-			currentArtist = ""
-			currentAlbum = ""
-			song = track.getCurrentSong()
-			artist = track.getCurrentArtist()
-			album = track.getCurrentAlbum()
-
-			if (song != currentSong or artist != currentArtist 
-				or album != currentAlbum):
-				currentSong = song
-				currentArtist = artist
-				currentAlbum = album
-				self._callListeners()
-			yield
-
 	def checkSong(self):
-		next(self._generator)
+		song = track.getCurrentSong()
+		artist = track.getCurrentArtist()
+		album = track.getCurrentAlbum()
+
+		if (song != self.currentSong or artist != self.currentArtist 
+			or album != self.currentAlbum):
+			self.currentSong = song
+			self.currentArtist = artist
+			self.currentAlbum = album
+			self._callListeners()
+		
 		if self.timer != None:
 			self.startTimer()
 
@@ -45,3 +40,4 @@ class TrackChecker():
 
 	def cancelTimer(self):
 		self.timer.cancel()
+		self.timer = None
