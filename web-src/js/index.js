@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	var songInfo = document.getElementById("song-name");
 	var artistInfo = document.getElementById("artist-name");
-	var albumInfo = document.getELementById("album-name");
+	var albumInfo = document.getElementById("album-name");
+
+	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
 
 	function updateInfo(data) { 
 		songInfo.textContent = data.song;
@@ -19,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.send();
 	}
 
+	ws.addEventListener("message", function(event){
+		data = JSON.parse(event.data);
+		updateInfo(data);
+	});
 
 	previousButton.addEventListener("click", function(event) {
 		sendTrackCommand("previous");
