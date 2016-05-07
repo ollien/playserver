@@ -29,10 +29,10 @@ class TrackSocketServer():
 			self.loop = loop
 		
 	def run(self):
+		asyncio.set_event_loop(self.loop)
 		hostAddr = "ws://{}:{}".format(self.host, self.port)
 		serverFactory = TrackSocketServerFactory(hostAddr)
 		serverFactory.protocol = TrackSocket
-		asyncio.set_event_loop(self.loop)
 		serverInit = self.loop.create_server(serverFactory, self.host, self.port)
 		server = self.loop.run_until_complete(serverInit)
 		self.loop.run_forever()
