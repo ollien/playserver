@@ -44,11 +44,5 @@ class TrackSocketServer():
 		server = self.loop.run_until_complete(serverInit)
 		self.loop.run_forever()
 
-	def transmitTrackChange(self):
-		data = {
-			"song": track.getCurrentSong(),
-			"artist": track.getCurrentArtist(),
-			"album": track.getCurrentAlbum()
-		}
-
+	def transmitTrackChange(self, data):
 		self.factory.broadcastMessage(json.dumps(data))
