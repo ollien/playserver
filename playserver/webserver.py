@@ -29,7 +29,7 @@ def root():
 @app.route("/get_song_info")
 def getSongInfo():
 	return json.dumps({
-		"name": track.getCurrentSong(),
+		"song": track.getCurrentSong(),
 		"artist": track.getCurrentAritst(),
 		"album": track.getCrrentAlbum()
 	})
