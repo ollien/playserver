@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.send();
 	}
 
+	//We want to put the song on the page after it loads
+	manuallyUpdateSong();
+
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
 		updateInfo(data);
