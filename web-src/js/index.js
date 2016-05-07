@@ -17,11 +17,12 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	function manuallyUpdateSong() {
 		var request = new XMLHttpRequest();
-		request.open("POST", "/get_song_info");
+		request.open("GET", "/get_song_info");
 		request.addEventListener("load", function(event) {
 			data = JSON.parse(event.responseText);
 			updateInfo(data);
 		});
+		request.send();
 	}
 	
 	function sendTrackCommand(command) {
