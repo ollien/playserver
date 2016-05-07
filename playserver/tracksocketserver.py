@@ -1,19 +1,22 @@
 import autobahn.asyncio.websocket
 import asyncio
 
-class TrackSocket(autobah.asyncio.websocket.WebSocketServerProtocol):
-	@asyncio.coroutine
+class TrackSocket(autobahn.asyncio.websocket.WebSocketServerProtocol):
+
+	def onConnect(self, request):
+		print("Client connecting: {}".format(request.peer))
+
 	def onOpen(self):
 		#TODO: Make this add to the client list
 		print("opened")
 
-	def closed(self, wasClean, code, reason):
+	def onClose(self, wasClean, code, reason):
 		#TODO: make this remove from the client list
 		print("closed")
 
-class TrackSocketServerFactory(autobah.asyncio.websocket.WebSocketServerFactory):
+class TrackSocketServerFactory(autobahn.asyncio.websocket.WebSocketServerFactory):
 	def __init__(self, url):
-		super().__init__(self, url)
+		super().__init__(url)
 		self.clients = []
 	
 	def broadcastMessage(self, message):
@@ -31,9 +34,10 @@ class TrackSocketServer():
 			self.loop = loop
 		
 	def run(self):
-		hostAddr = "ws://{}:{}".format(host, port)
+		hostAddr = "ws://{}:{}".format(self.host, self.port)
 		serverFactory = TrackSocketServerFactory(hostAddr)
+		serverFactory.protocol = TrackSocket
 		asyncio.set_event_loop(self.loop)
-		serverInit = loop.create_server(serverFacotry, host, port)
-		server = loop.run_until_complete(serverInit)
-		server.run_forever()
+		serverInit = self.loop.create_server(serverFactory, self.host, self.port)
+		server = self.loop.run_until_complete(serverInit)
+		self.loop.run_forever()
