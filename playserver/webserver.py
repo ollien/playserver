@@ -30,8 +30,8 @@ def root():
 def getSongInfo():
 	return json.dumps({
 		"song": track.getCurrentSong(),
-		"artist": track.getCurrentAritst(),
-		"album": track.getCrrentAlbum()
+		"artist": track.getCurrentArtist(),
+		"album": track.getCurrentAlbum()
 	})
 
 @app.route("/play_pause", methods = ["POST"])
