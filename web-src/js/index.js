@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function(event){
 	function sendTrackCommand(command) {
 		var request = new XMLHttpRequest();
 		request.open("POST", "/" + command, true);
+		request.addEventListener("load", function(event){
+			if (request.status === 200) {
+				manuallyUpdateSong();
+			}
+		});
 		request.send();
 	}
 
