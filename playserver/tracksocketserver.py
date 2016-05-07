@@ -3,16 +3,11 @@ import asyncio
 
 class TrackSocket(autobahn.asyncio.websocket.WebSocketServerProtocol):
 
-	def onConnect(self, request):
-		print("Client connecting: {}".format(request.peer))
-
 	def onOpen(self):
-		#TODO: Make this add to the client list
-		print("opened")
+		self.factory.clients.append(self)
 
 	def onClose(self, wasClean, code, reason):
-		#TODO: make this remove from the client list
-		print("closed")
+		self.factory.clients.remove(self)
 
 class TrackSocketServerFactory(autobahn.asyncio.websocket.WebSocketServerFactory):
 	def __init__(self, url):
