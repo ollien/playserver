@@ -31,8 +31,14 @@ class TrackChecker():
 		_listeners.append(function)
 
 	def _callListeners(self):
+		data = {
+			"song": track.getCurrentSong(),
+			"artist": track.getCurrentArtist(),
+			"album": track.getCurrentAlbum()
+		}
+
 		for listener in _listeners:
-			listener()
+			listener(data)
 
 	def startTimer(self):
 		self.timer = Timer(self.CHECK_INTERVAL, self.checkSong)
