@@ -1,9 +1,3 @@
-function sendTrackCommand(command) {
-	var request = new XMLHttpRequest();
-	request.open("POST", "/" + command, true);
-	request.send();
-}
-
 document.addEventListener("DOMContentLoaded", function(event){
 	var previousButton = document.getElementById("previous");
 	var playPauseButton = document.getElementById("playpause");
@@ -18,6 +12,13 @@ document.addEventListener("DOMContentLoaded", function(event){
 		artistInfo.textContent = data.artist;
 		albumInfo.textContent = data.album;
 	}
+	
+	function sendTrackCommand(command) {
+		var request = new XMLHttpRequest();
+		request.open("POST", "/" + command, true);
+		request.send();
+	}
+
 
 	previousButton.addEventListener("click", function(event) {
 		sendTrackCommand("previous");
