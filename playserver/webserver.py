@@ -14,7 +14,7 @@ app = flask.Flask(__name__, template_folder = TEMPLATE_PATH, static_folder = STA
 
 #Start Websocket Thread
 loop = asyncio.get_event_loop()
-socketServ = tracksocketserver.TrackSocketServer(loop)
+socketServ = tracksocketserver.TrackSocketServer(loop, host = "0.0.0.0")
 socketThread = threading.Thread(None, socketServ.run)
 socketThread.start()
 
