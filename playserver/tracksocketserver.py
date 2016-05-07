@@ -15,8 +15,8 @@ class TrackSocketServerFactory(autobahn.asyncio.websocket.WebSocketServerFactory
 		self.clients = []
 	
 	def broadcastMessage(self, message):
-		for client in selfclients:
-			client.sendMessage(message)
+		for client in self.clients:
+			client.sendMessage(message.encode("utf-8"))
 
 class TrackSocketServer():
 	def __init__(self, loop = None, host="127.0.0.1", port=5001):
