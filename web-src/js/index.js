@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 		var request = new XMLHttpRequest();
 		request.open("GET", "/get_song_info");
 		request.addEventListener("load", function(event) {
-			data = JSON.parse(event.responseText);
+			data = JSON.parse(request.responseText);
 			updateInfo(data);
 		});
 		request.send();
