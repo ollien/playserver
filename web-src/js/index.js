@@ -14,6 +14,15 @@ document.addEventListener("DOMContentLoaded", function(event){
 		artistInfo.textContent = data.artist;
 		albumInfo.textContent = data.album;
 	}
+
+	function manuallyUpdateSong() {
+		var request = new XMLHttpRequest();
+		request.open("POST", "/get_song_info");
+		request.addEventListener("load", function(event) {
+			data = JSON.parse(event.responseText);
+			updateInfo(data);
+		});
+	}
 	
 	function sendTrackCommand(command) {
 		var request = new XMLHttpRequest();
