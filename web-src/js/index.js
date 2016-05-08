@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	var bubbles = document.querySelectorAll("div.bubble");
 
+	var playing = false;
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
+
 
 	function updateInfo(data) { 
 		line1.textContent = data.song;
@@ -34,6 +36,18 @@ document.addEventListener("DOMContentLoaded", function(event){
 			}
 		});
 		request.send();
+	}
+
+	function togglePlayPauseButton() {
+		if (playing) {
+			playPauseButton.classList.remove("fa-play");
+			playPauseButton.classList.add("fa-pause");
+		}
+		else {
+			playPauseButton.classList.remove("fa-pause");
+			playPauseButton.classList.add("fa-play");
+		}
+
 	}
 
 	//We want to put the song on the page after it loads
