@@ -1,3 +1,6 @@
+$max-bubble-opacity: .3;
+$control-size: 100px;
+
 @font-face { 
 	font-family: "Lato";
 	src: url("/static/fonts/Lato-Light.ttf");
@@ -16,14 +19,48 @@ body {
 }
 
 #controls { 
-	font-size: 100px;
-	margin-top: 50px;
+	font-size: $control-size * 7/8;
+	margin-top: $control-size/2;
 
 	div.control {
+		position: relative;
 		display: inline-block;
-		margin: 0 25px;
-		height: 100px;
-		width: 100px;
+		margin: 0 $control-size/4;
+		height: $control-size;
+		width: $control-size;
+		line-height: $control-size;
 		color: white;
+		z-index: 99;
+	}
+
+	div.control.animating {
+		position: relative;
+		div.bubble {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			opacity: 0;
+			animation: bubble 300ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
+			background-color: white;
+		}
+	}
+}
+
+
+@keyframes bubble {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	
+	50% { 
+		opacity: $max-bubble-opacity;	
+	}
+	
+	100% {
+		transform: scale(1);
+		opacity: 0;
 	}
 }

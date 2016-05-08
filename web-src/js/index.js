@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var artistInfo = document.getElementById("artist-name");
 	var albumInfo = document.getElementById("album-name");
 
+	var bubbles = document.querySelectorAll("div.bubble");
+
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
 
 	function updateInfo(data) { 
@@ -46,13 +48,23 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	previousButton.addEventListener("click", function(event) {
 		sendTrackCommand("previous");
+		previousButton.classList.add("animating");
 	});
 
 	playPauseButton.addEventListener("click", function(event) {
 		sendTrackCommand("play_pause");
+		playPauseButton.classList.add("animating");
 	});
 
 	nextButton.addEventListener("click", function(event) {
 		sendTrackCommand("next");
+		nextButton.classList.add("animating");
+	});
+
+	Array.prototype.slice.call(bubbles).forEach(function(bubble) {
+		bubble.addEventListener("animationend", function(event){
+			console.log("finished");
+			bubble.parentNode.classList.remove("animating");
+		});
 	});
 });
