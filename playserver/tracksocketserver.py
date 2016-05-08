@@ -2,7 +2,6 @@ import autobahn.asyncio.websocket
 import asyncio
 import json
 from . import track
-from . import trackchecker
 
 class TrackSocket(autobahn.asyncio.websocket.WebSocketServerProtocol):
 
@@ -25,7 +24,6 @@ class TrackSocketServer():
 	def __init__(self, loop = None, host="127.0.0.1", port=5001):
 		self.host = host
 		self.port = port
-		self.trackChecker = trackchecker.TrackChecker(interval = 2)
 
 		if loop is None:
 			self.loop = asyncio.get_event_loop()	
@@ -38,8 +36,7 @@ class TrackSocketServer():
 	def run(self):
 		asyncio.set_event_loop(self.loop)
 		self.factory.protocol = TrackSocket
-		self.trackChecker.registerListener(self.transmitTrackChange)
-		self.trackChecker.startTimer()
+		track.checker.registerListener(self.transmitTrackChange)
 		serverInit = self.loop.create_server(self.factory, self.host, self.port)
 		server = self.loop.run_until_complete(serverInit)
 		self.loop.run_forever()
