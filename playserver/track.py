@@ -17,7 +17,7 @@ class _TrackController():
 		return list(self._applicationConfigs._configs.keys())
 
 	def getCurrentConfig(self):
-		return self._applicationConfigs[currentApplication]
+		return self._applicationConfigs[self.currentApplication]
 
 	def _executeCommand(self, command):
 		config = self.getCurrentConfig()
@@ -60,7 +60,7 @@ class _TrackController():
 		else:
 			return result[2]
 
-	def getCurrentArtist():
+	def getCurrentArtist(self):
 		result = self._executeCommand("currentartist")
 		#Return stdout if there is no error, stderr if otherwise
 		if result[0] == 0:
