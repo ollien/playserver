@@ -3,18 +3,16 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var playPauseButton = document.getElementById("playpause");
 	var nextButton = document.getElementById("next");
 
-	var songInfo = document.getElementById("song-name");
-	var artistInfo = document.getElementById("artist-name");
-	var albumInfo = document.getElementById("album-name");
+	var line1 = document.getElementById("track-line-1");
+	var line2 = document.getElementById("track-line-2");
 
 	var bubbles = document.querySelectorAll("div.bubble");
 
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
 
 	function updateInfo(data) { 
-		songInfo.textContent = data.song;
-		artistInfo.textContent = data.artist;
-		albumInfo.textContent = data.album;
+		line1.textContent = data.song;
+		line2.textContent = data.artist + " - " + data.album;
 	}
 
 	function manuallyUpdateSong() {
