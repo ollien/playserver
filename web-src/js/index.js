@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var previousButton = document.getElementById("previous");
 	var playPauseButton = document.getElementById("playpause");
 	var nextButton = document.getElementById("next");
-
+	//Player lines
 	var line1 = document.getElementById("track-line-1");
 	var line2 = document.getElementById("track-line-2");
-
+	//Animation bubbles for play button
 	var bubbles = document.querySelectorAll("div.bubble");
+	//Dropdown to select player
+	var playerSelect = document.getElementById("player-select");
 
 	var playing = false;
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
@@ -61,7 +63,22 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.send();
 	}
 
+	function populatePlayerSelect() {
+		var request = new XMLHttpRequest();
+		request.open("GET", "/get_applications");
+		request.addEventListener("load", function(event) {
+			data = JSON.parse(request.responseText);	
+			data.forEach(function(player) {
+				select = document.createElement("option");
+				select.textContent = player;
+				playerSelect.appendChild(select);
+			});
+		});
+		request.send();
+	}
+
 	//We want to put the song on the page after it loads
+	populatePlayerSelect();
 	manuallyUpdateSong();
 	updatePlayerState();
 
