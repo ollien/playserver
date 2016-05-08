@@ -51,3 +51,15 @@ def next():
 def previous():
 	track.controller.previous()
 	return ""
+
+@app.route("/get_applications")
+def getApplications():
+	return json.dumps(track.controller.getAvailableApplications())
+
+@app.route("/set_application", methods = ["POST"])
+def setApplication():
+	if "application" in request.form:
+		setApplication(request.form["application"])
+		return {"error": 0}
+	else:
+		return {"error": 1}, 400
