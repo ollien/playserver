@@ -10,18 +10,21 @@ class TrackChecker():
 		self.currentSong = ""
 		self.currentArtist = ""
 		self.currentAlbum = ""
+		self.playing = False
 		self.timer = None
 
 	def checkSong(self):
 		song = track.getCurrentSong()
 		artist = track.getCurrentArtist()
 		album = track.getCurrentAlbum()
+		playing = int(track.getPlayerState()) > 1
 
 		if (song != self.currentSong or artist != self.currentArtist 
-			or album != self.currentAlbum):
+			or album != self.currentAlbum or playing != self.playing):
 			self.currentSong = song
 			self.currentArtist = artist
 			self.currentAlbum = album
+			self.playing = playing
 			self._callListeners()
 		
 		if self.timer != None:
@@ -34,7 +37,8 @@ class TrackChecker():
 		data = {
 			"song": track.getCurrentSong(),
 			"artist": track.getCurrentArtist(),
-			"album": track.getCurrentAlbum()
+			"album": track.getCurrentAlbum(),
+			"playing": int(track.getPlayerState()) > 1
 		}
 
 		for listener in _listeners:
