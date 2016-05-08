@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	Array.prototype.slice.call(bubbles).forEach(function(bubble) {
 		bubble.addEventListener("animationend", function(event){
-			console.log("finished");
 			bubble.parentNode.classList.remove("animating");
 		});
 	});
