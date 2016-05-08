@@ -4,8 +4,14 @@ from . import configmanager
 APP_CONFIG_PATH = "applications/"
 
 applicationConfigs = configmanager.ConfigManager(APP_CONFIG_PATH)
-#TODO: Make this user choosable
 currentApplication = "radiant"
+
+def setApplication(name):
+	global currentApplication
+	currentApplication = name
+
+def getAvailableApplications():
+	return list(applicationConfigs._configs.keys())
 
 def getCurrentConfig():
 	return applicationConfigs[currentApplication]
