@@ -8,5 +8,10 @@
 		"currentalbum": "get current song album",
 		"currentartist": "get current song artist",
 		"state": "get player state"
+	},
+	"player-states": {
+		"stopped": "0",
+		"paused": "1",
+		"playing": "2"
 	}
 }

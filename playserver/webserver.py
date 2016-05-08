@@ -37,7 +37,7 @@ def getSongInfo():
 @app.route("/get_player_state")
 def getPlayerState():
 	return json.dumps({
-		"playing": int(track.getPlayerState()) > 1
+		"playing": track.isPlaying()
 	})
 
 @app.route("/play_pause", methods = ["POST"])

@@ -17,7 +17,7 @@ class TrackChecker():
 		song = track.getCurrentSong()
 		artist = track.getCurrentArtist()
 		album = track.getCurrentAlbum()
-		playing = int(track.getPlayerState()) > 1
+		playing = track.isPlaying()
 
 		if (song != self.currentSong or artist != self.currentArtist 
 			or album != self.currentAlbum or playing != self.playing):
@@ -38,7 +38,7 @@ class TrackChecker():
 			"song": track.getCurrentSong(),
 			"artist": track.getCurrentArtist(),
 			"album": track.getCurrentAlbum(),
-			"playing": int(track.getPlayerState()) > 1
+			"playing": track.isPlaying()
 		}
 
 		for listener in _listeners:
