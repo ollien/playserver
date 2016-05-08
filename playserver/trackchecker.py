@@ -1,7 +1,6 @@
 from threading import Timer
 from . import track
 
-_listeners = []
 
 class TrackChecker():
 	def __init__(self, interval = 5):
@@ -31,7 +30,7 @@ class TrackChecker():
 			self.startTimer()
 
 	def registerListener(self, function):
-		_listeners.append(function)
+		self.listeners.append(function)
 
 	def _callListeners(self):
 		data = {
@@ -41,7 +40,7 @@ class TrackChecker():
 			"playing": track.isPlaying()
 		}
 
-		for listener in _listeners:
+		for listener in self.listeners:
 			listener(data)
 
 	def startTimer(self):
