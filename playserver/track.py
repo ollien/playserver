@@ -16,6 +16,15 @@ def _executeCommand(command):
 		config["commands"][command])
 	return osascript.osascript(fullCommand)
 
+def getPlayerState():
+	result = _executeCommand("state")
+
+	#Return stdout if there is no error, stderr if otherwise
+	if result[0] == 0:
+		return result[1]
+	else:
+		return result[2]
+
 def playPause():
 	_executeCommand("playpause")
 

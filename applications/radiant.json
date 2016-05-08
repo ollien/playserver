@@ -6,6 +6,7 @@
 		"previous": "back track",
 		"currentsong": "get current song name",
 		"currentalbum": "get current song album",
-		"currentartist": "get current song artist"
+		"currentartist": "get current song artist",
+		"state": "get player state"
 	}
 }
