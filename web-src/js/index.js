@@ -50,8 +50,20 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	}
 
+	function updatePlayerState() {
+		var request = new XMLHttpRequest();
+		request.open("GET", "/get_player_state");
+		request.addEventListener("load", function(event) {
+			data = JSON.parse(request.responseText);
+			playing = data.playing;
+			togglePlayPauseButton();
+		});
+		request.send();
+	}
+
 	//We want to put the song on the page after it loads
 	manuallyUpdateSong();
+	updatePlayerState();
 
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
@@ -66,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 	playPauseButton.addEventListener("click", function(event) {
 		sendTrackCommand("play_pause");
 		playPauseButton.classList.add("animating");
+		updatePlayerState();
 	});
 
 	nextButton.addEventListener("click", function(event) {
