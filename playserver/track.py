@@ -15,7 +15,8 @@ class _TrackController():
 		checker._callListeners()
 
 	def getAvailableApplications(self):
-		return list(self._applicationConfigs._configs.keys())
+		configs = self._applicationConfigs._configs
+		return [{"name": configs[app]["name"], "key": app} for app in configs]
 
 	def getCurrentConfig(self):
 		return self._applicationConfigs[self.currentApplication]
