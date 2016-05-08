@@ -119,5 +119,5 @@ class _TrackChecker():
 		self.timer = None
 
 controller = _TrackController()
-checker = _TrackChecker()
+checker = _TrackChecker(interval = 2)
 checker.startTimer()
