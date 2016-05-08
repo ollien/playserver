@@ -21,36 +21,33 @@ socketThread.start()
 #Begin Flask routes
 @app.route("/")
 def root():
-	song = track.getCurrentSong()
-	artist = track.getCurrentArtist()
-	album = track.getCurrentAlbum()
 	return flask.render_template("index.html")
 
 @app.route("/get_song_info")
 def getSongInfo():
 	return json.dumps({
-		"song": track.getCurrentSong(),
-		"artist": track.getCurrentArtist(),
-		"album": track.getCurrentAlbum()
+		"song": track.controller.getCurrentSong(),
+		"artist": track.controller.getCurrentArtist(),
+		"album": track.controller.getCurrentAlbum()
 	})
 
 @app.route("/get_player_state")
 def getPlayerState():
 	return json.dumps({
-		"playing": track.isPlaying()
+		"playing": track.controller.isPlaying()
 	})
 
 @app.route("/play_pause", methods = ["POST"])
 def playPause():
-	track.playPause()
+	track.controller.playPause()
 	return ""
 
 @app.route("/next", methods = ["POST"])
 def next():
-	track.next()
+	track.controller.next()
 	return ""
 
 @app.route("/previous", methods = ["POST"])
 def previous():
-	track.previous()
+	track.controller.previous()
 	return ""

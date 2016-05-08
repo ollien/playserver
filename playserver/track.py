@@ -5,6 +5,7 @@ APP_CONFIG_PATH = "applications/"
 
 controller = _TrackController()
 checker = _TrackChecker()
+checker.startTimer()
 
 class _TrackController():
 	
