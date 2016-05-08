@@ -1,15 +1,12 @@
 import osascript
+from threading import Timer
 from . import configmanager
 
 APP_CONFIG_PATH = "applications/"
 
-controller = _TrackController()
-checker = _TrackChecker()
-checker.startTimer()
-
 class _TrackController():
 	
-	def __init__(self, application = "radiant")
+	def __init__(self, application = "radiant"):
 		self.currentApplication = application
 		self._applicationConfigs = configmanager.ConfigManager(APP_CONFIG_PATH)
 
@@ -120,3 +117,7 @@ class _TrackChecker():
 	def cancelTimer(self):
 		self.timer.cancel()
 		self.timer = None
+
+controller = _TrackController()
+checker = _TrackChecker()
+checker.startTimer()
