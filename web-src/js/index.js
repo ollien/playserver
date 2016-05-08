@@ -67,7 +67,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
+		playing = data.playing;
 		updateInfo(data);
+		togglePlayPauseButton();
 	});
 
 	previousButton.addEventListener("click", function(event) {
