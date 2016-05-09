@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function(event){
 			data = JSON.parse(request.responseText);	
 			data.forEach(function(player) {
 				select = document.createElement("option");
-				select.textContent = player;
+				select.textContent = player.name;
+				select.setAttribute("key", player.key);
 				playerSelect.appendChild(select);
 			});
 		});
