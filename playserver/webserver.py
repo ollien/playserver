@@ -63,3 +63,7 @@ def setApplication():
 		return {"error": 0}
 	else:
 		return {"error": 1}, 400
+
+@app.route("/get_application")
+def getApplication():
+	return track.controller.currentApplication	
