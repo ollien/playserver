@@ -71,7 +71,10 @@ document.addEventListener("DOMContentLoaded", function(event){
 			data.forEach(function(player) {
 				select = document.createElement("option");
 				select.textContent = player.name;
-				select.setAttribute("key", player.key);
+				select.setAttribute("value", player.key);
+				if (player.current) {
+					select.value = player.key;
+				}
 				playerSelect.appendChild(select);
 			});
 		});
