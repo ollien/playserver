@@ -16,7 +16,10 @@ class _TrackController():
 
 	def getAvailableApplications(self):
 		configs = self._applicationConfigs._configs
-		return [{"name": configs[app]["name"], "key": app} for app in configs]
+		return [{"name": configs[app]["name"], 
+			"key": app, 
+			"current": self.currentApplication == app} 
+			for app in configs]
 
 	def getCurrentConfig(self):
 		return self._applicationConfigs[self.currentApplication]
