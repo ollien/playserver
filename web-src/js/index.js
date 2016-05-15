@@ -69,10 +69,10 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.addEventListener("load", function(event) {
 			data = JSON.parse(request.responseText);	
 			data.forEach(function(player) {
-				select = document.createElement("option");
-				select.textContent = player.name;
-				select.setAttribute("value", player.key);
-				playerSelect.appendChild(select);
+				option = document.createElement("option");
+				option.textContent = player.name;
+				option.setAttribute("value", player.key);
+				playerSelect.appendChild(option);
 				if (player.current) {
 					playerSelect.value = player.key;
 				}
