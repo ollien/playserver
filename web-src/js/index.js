@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var bubbles = document.querySelectorAll("div.bubble");
 	//Dropdown to select player
 	var playerSelect = document.getElementById("player-select");
+	//Volume slider
+	var volumeSlider = document.getElementById("volume-slider");
 
 	var playing = false;
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
@@ -81,14 +83,25 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.send();
 	}
 
+	function setSliderToVolume() {
+		var request = new XMLHttpRequest();
+		request.open("GET", "/get_system_volume");
+		request.addEventListener("load", function(event) {
+			volumeSlider.value = request.responseText;
+		});
+		request.send();
+	}
+
 	//We want to put the song on the page after it loads
 	populatePlayerSelect();
 	manuallyUpdateSong();
 	updatePlayerState();
+	setSliderToVolume();
 
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
 		playing = data.playing;
+		volumeSlider.value = data.volume;
 		updateInfo(data);
 		togglePlayPauseButton();
 	});
@@ -124,5 +137,12 @@ document.addEventListener("DOMContentLoaded", function(event){
 			updatePlayerState();
 		});
 		request.send(JSON.stringify({"application": playerSelect.value}));
+	});
+
+	volumeSlider.addEventListener("change", function(event) {
+		var request = new XMLHttpRequest();
+		request.open("POST", "/set_system_volume");
+		request.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded; charset=UTF-8");
+		request.send(volumeSlider.value);
 	});
 });

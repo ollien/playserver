@@ -72,6 +72,12 @@ class _TrackController():
 			return result[1]
 		else:
 			return result[2]
+	
+	def getSystemVolume(self):
+		return osascript.osascript("output volume of (get volume settings)")[1]
+	
+	def setSystemVolume(self, volume):
+		osascript.osascript("set volume output volume {}".format(volume))
 
 class _TrackChecker():
 	def __init__(self, interval = 5):
@@ -81,20 +87,24 @@ class _TrackChecker():
 		self.currentArtist = ""
 		self.currentAlbum = ""
 		self.playing = False
+		self.volume = None
 		self.timer = None
 
-	def checkSong(self):
+	def checkPlayer(self):
 		song = controller.getCurrentSong()
 		artist = controller.getCurrentArtist()
 		album = controller.getCurrentAlbum()
 		playing = controller.isPlaying()
+		volume = controller.getSystemVolume()
 
 		if (song != self.currentSong or artist != self.currentArtist 
-			or album != self.currentAlbum or playing != self.playing):
+			or album != self.currentAlbum or playing != self.playing
+			or volume != self.volume):
 			self.currentSong = song
 			self.currentArtist = artist
 			self.currentAlbum = album
 			self.playing = playing
+			self.volume = volume
 			self._callListeners()
 		
 		if self.timer != None:
@@ -108,14 +118,15 @@ class _TrackChecker():
 			"song": controller.getCurrentSong(),
 			"artist": controller.getCurrentArtist(),
 			"album": controller.getCurrentAlbum(),
-			"playing": controller.isPlaying()
+			"playing": controller.isPlaying(), 
+			"volume": controller.getSystemVolume()
 		}
 
 		for listener in self.listeners:
 			listener(data)
 
 	def startTimer(self):
-		self.timer = Timer(self.CHECK_INTERVAL, self.checkSong)
+		self.timer = Timer(self.CHECK_INTERVAL, self.checkPlayer)
 		self.timer.daemon = True
 		self.timer.start()
 
