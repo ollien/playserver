@@ -90,7 +90,7 @@ class _TrackChecker():
 		self.volume = None
 		self.timer = None
 
-	def checkSong(self):
+	def checkPlayer(self):
 		song = controller.getCurrentSong()
 		artist = controller.getCurrentArtist()
 		album = controller.getCurrentAlbum()
@@ -126,7 +126,7 @@ class _TrackChecker():
 			listener(data)
 
 	def startTimer(self):
-		self.timer = Timer(self.CHECK_INTERVAL, self.checkSong)
+		self.timer = Timer(self.CHECK_INTERVAL, self.checkPlayer)
 		self.timer.daemon = True
 		self.timer.start()
 
