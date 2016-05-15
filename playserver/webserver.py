@@ -12,11 +12,13 @@ STATIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../static
 #Intialize Flask App
 app = flask.Flask(__name__, template_folder = TEMPLATE_PATH, static_folder = STATIC_PATH)
 
-#Start Websocket Thread
-loop = asyncio.get_event_loop()
-socketServ = tracksocketserver.TrackSocketServer(loop, host = "0.0.0.0")
-socketThread = threading.Thread(None, socketServ.run)
-socketThread.start()
+
+@app.before_first_request
+def startSocketServer():
+	loop = asyncio.get_event_loop()
+	socketServ = tracksocketserver.TrackSocketServer(loop, host = "0.0.0.0")
+	socketThread = threading.Thread(None, socketServ.run)
+	socketThread.start()
 
 #Begin Flask routes
 @app.route("/")
