@@ -1,17 +1,17 @@
-Playserver
+PlayServer
 ===========
 
-Have you ever wanted to control your music from another device in your home? Look no further than Playserver! Built on Flask, websockets, and osascript, PlayServer will allow you to control your music from any device.
+Have you ever wanted to control your music from another device in your home? Look no further than PlayServer! Built on Flask, websockets, and osascript, PlayServer will allow you to control your music from any device.
 
 ![Screenshot](https://raw.githubusercontent.com/ollien/playserver/master/README_SCREENSHOT.png)
 
 Requirements
 ------------
-Currently, Playserver only works on Mac OSX due to its extensive use of osascript. **Make sure you have osascript installed!**
+Currently, PlayServer only works on Mac OSX due to its extensive use of osascript. **Make sure you have osascript installed!**
 
 Supported Applications
 ----------------------
-Out of the box, Playserver only supports iTunes, Spotify, and Radiant Player. However, you can add whatever application you want. Simply create a new JSON file in the applications directory, and add the appropriate osascript commands for your application. For instance, this is the iTunes config file.
+Out of the box, PlayServer only supports iTunes, Spotify, and Radiant Player. However, you can add whatever application you want. Simply create a new JSON file in the applications directory, and add the appropriate osascript commands for your application. For instance, this is the iTunes config file.
 
 ```json
 {
@@ -33,11 +33,11 @@ Out of the box, Playserver only supports iTunes, Spotify, and Radiant Player. Ho
 }
 ```
 
-The "name" attribute is the application that will be controlled via osascript. The "commands" object holds all commands supported by Playserver. For instance, when PlayServer looks to skip to the next song, it will run `tell application "iTunes" to next track`. "iTunes" was extracted from the "name" attribute and "next track" was extracted from commands.next. Because some applications use different verbs for their player states, a "player-states" object is provided. For instance, if an application's "stopped" state is 0, then player-states.stopped should be equal to "0."
+The "name" attribute is the application that will be controlled via osascript. The "commands" object holds all commands supported by PlayServer. For instance, when PlayServer looks to skip to the next song, it will run `tell application "iTunes" to next track`. "iTunes" was extracted from the "name" attribute and "next track" was extracted from commands.next. Because some applications use different verbs for their player states, a "player-states" object is provided. For instance, if an application's "stopped" state is 0, then player-states.stopped should be equal to "0."
 
 Usage
 -----
-Playserver can be run standalone by simply running the `run` script provided. Alternatively, it can be run using a wsgi middleware server such as uwsgi. The wsgi file is located in playserver/wsgi.py
+PlayServer can be run standalone by simply running the `run` script provided. Alternatively, it can be run using a wsgi middleware server such as uwsgi. The wsgi file is located in playserver/wsgi.py
 
 License
 -------
