@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var bubbles = document.querySelectorAll("div.bubble");
 	//Dropdown to select player
 	var playerSelect = document.getElementById("player-select");
+	//Volume slider
+	var volumeSlider = document.getElementById("volume-slider");
 
 	var playing = false;
 	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
@@ -81,10 +83,22 @@ document.addEventListener("DOMContentLoaded", function(event){
 		request.send();
 	}
 
+	function setSliderToVolume() {
+		console.log('requesting');
+		var request = new XMLHttpRequest();
+		request.open("GET", "/get_system_volume");
+		request.addEventListener("load", function(event) {
+			console.log('requested');
+			volumeSlider.value = request.responseText;
+		});
+		request.send();
+	}
+
 	//We want to put the song on the page after it loads
 	populatePlayerSelect();
 	manuallyUpdateSong();
 	updatePlayerState();
+	setSliderToVolume();
 
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
