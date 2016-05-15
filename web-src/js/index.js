@@ -119,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function(event){
 		var request = new XMLHttpRequest();
 		request.open("POST", "/set_application");
 		request.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded; charset=UTF-8");
+		request.addEventListener("load", function(event) {
+			manuallyUpdateSong();	
+			updatePlayerState();
+		});
 		request.send(JSON.stringify({"application": playerSelect.value}));
 	});
 });
