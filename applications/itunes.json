@@ -1,0 +1,17 @@
+{
+	"name": "iTunes",
+	"commands": {
+		"playpause": "playpause",
+		"next": "next track",
+		"previous": "previous track",
+		"currentsong": "get name of current track",
+		"currentalbum": "get album of current track",
+		"currentartist": "get artist of current track",
+		"state": "get player state"
+	},
+	"player-states": {
+		"stopped": "stopped",
+		"paused": "paused",
+		"playing": "playing"
+	}
+}
