@@ -28,7 +28,7 @@ body {
 #track-info {
 	color: white;
 	font-family: "Lato", "Helvetica Neue", sans-serif;
-	font-weight: 200;
+	font-weight: 300;
 	font-size: 50px;
 
 	div.info-line {
@@ -68,6 +68,16 @@ body {
 			animation: bubble 300ms cubic-bezier(0.445, 0.050, 0.550, 0.950);
 			background-color: white;
 		}
+	}
+}
+
+#selection-container {
+	font-family: "Lato", "Helvetica Neue", sans-serif;
+	color: #ffffff;
+	font-size: 14pt;
+	font-weight: 300;
+	#player-select {
+		margin-left: 10px;	
 	}
 }
 
