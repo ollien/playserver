@@ -114,4 +114,11 @@ document.addEventListener("DOMContentLoaded", function(event){
 			bubble.parentNode.classList.remove("animating");
 		});
 	});
+
+	playerSelect.addEventListener("change", function(event) {
+		var request = new XMLHttpRequest();
+		request.open("POST", "/set_application");
+		request.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded; charset=UTF-8");
+		request.send(JSON.stringify({"application": playerSelect.value}));
+	});
 });
