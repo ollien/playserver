@@ -73,21 +73,26 @@ body {
 	}
 }
 
-#selection-container {
-	display: inline-block;
-	font-family: "Lato", "Helvetica Neue", sans-serif;
-	color: #ffffff;
-	font-weight: 300;
-	float: left;
-	#player-select {
-		margin-left: 10px;	
+#top-bar {
+	width: 100%;
+	#selection-container {
+		display: table;
+		font-family: "Lato", "Helvetica Neue", sans-serif;
+		color: #ffffff;
+		font-weight: 300;
+		float: left;
+		#player-select {
+			display: table-cell;
+			vertical-align: middle;
+			margin-left: 10px;	
+		}
 	}
-}
 
-#volume-container {
-	display: inline-block;
-	float: right;
-	color: #ffffff;
+	#volume-container {
+		float: right;
+		color: #ffffff;
+		margin-top: 8px;
+	}
 }
 
 
