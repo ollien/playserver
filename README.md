@@ -3,6 +3,8 @@ Playserver
 
 Have you ever wanted to control your music from another device in your home? Look no further than Playserver! Built on Flask, websockets, and osascript, PlayServer will allow you to control your music from any device.
 
+![Screenshot](https://raw.githubusercontent.com/ollien/playserver/master/README_SCREENSHOT.png)
+
 Requirements
 ------------
 Currently, Playserver only works on Mac OSX due to its extensive use of osascript. **Make sure you have osascript installed!**
