@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 	ws.addEventListener("message", function(event){
 		data = JSON.parse(event.data);
 		playing = data.playing;
+		volumeSlider.value = data.volume;
 		updateInfo(data);
 		togglePlayPauseButton();
 	});
