@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", function(event){
 				select = document.createElement("option");
 				select.textContent = player.name;
 				select.setAttribute("value", player.key);
-				if (player.current) {
-					select.value = player.key;
-				}
 				playerSelect.appendChild(select);
+				if (player.current) {
+					playerSelect.value = player.key;
+				}
 			});
 		});
 		request.send();
