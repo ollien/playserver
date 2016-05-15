@@ -72,6 +72,12 @@ class _TrackController():
 			return result[1]
 		else:
 			return result[2]
+	
+	def getSystemVolume(self):
+		return osascript.osascript("output volume of (get volume settings)")[1]
+	
+	def setSystemVolume(self, volume):
+		osascript.osascript("set volume output volume {}".format(volume))
 
 class _TrackChecker():
 	def __init__(self, interval = 5):
