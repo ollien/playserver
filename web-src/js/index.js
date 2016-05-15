@@ -84,11 +84,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 	}
 
 	function setSliderToVolume() {
-		console.log('requesting');
 		var request = new XMLHttpRequest();
 		request.open("GET", "/get_system_volume");
 		request.addEventListener("load", function(event) {
-			console.log('requested');
 			volumeSlider.value = request.responseText;
 		});
 		request.send();
@@ -138,5 +136,12 @@ document.addEventListener("DOMContentLoaded", function(event){
 			updatePlayerState();
 		});
 		request.send(JSON.stringify({"application": playerSelect.value}));
+	});
+
+	volumeSlider.addEventListener("change", function(event) {
+		var request = new XMLHttpRequest();
+		request.open("POST", "/set_system_volume");
+		request.setRequestHeader("Content-Type", "application/x-wwww-form-urlencoded; charset=UTF-8");
+		request.send(volumeSlider.value);
 	});
 });
