@@ -58,11 +58,12 @@ def getApplications():
 
 @app.route("/set_application", methods = ["POST"])
 def setApplication():
-	if "application" in request.form:
-		setApplication(request.form["application"])
-		return {"error": 0}
+	reqData = json.loads(flask.request.data.decode("utf-8"))
+	if "application" in reqData:
+		track.controller.setApplication(reqData["application"])
+		return json.dumps({"error": 0})
 	else:
-		return {"error": 1}, 400
+		return json.dumps({"error": 1}), 400
 
 @app.route("/get_application")
 def getApplication():
