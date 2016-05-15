@@ -75,10 +75,10 @@ def getApplication():
 def getSystemVolume():
 	return track.controller.getSystemVolume()
 
-@app.route("/set_system_volume")
+@app.route("/set_system_volume", methods = ["POST"])
 def setSystemVolume():
-	reqData = flask.request.data
-	if reqData.isDigit() and 0 < int(reqData) < 100:
+	reqData = flask.request.data.decode("utf-8")
+	if reqData.isdigit() and 0 <= int(reqData) <= 100:
 		track.controller.setSystemVolume(reqData)
 		return json.dumps({"error": 0})
 	else:
