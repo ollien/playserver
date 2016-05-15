@@ -36,3 +36,7 @@ The "name" attribute is the application that will be controlled via osascript. T
 Usage
 -----
 PlayServer can be run standalone by simply running the `run` script provided. Alternatively, it can be run using a wsgi middleware server such as uwsgi. The wsgi file is located in playserver/wsgi.py
+
+License
+-------
+MIT
