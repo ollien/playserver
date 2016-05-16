@@ -1,4 +1,4 @@
-import osascript
+import subprocess
 from threading import Timer
 from . import configmanager
 
@@ -28,7 +28,11 @@ class _TrackController():
 		config = self.getCurrentConfig()
 		fullCommand = "tell application \"{}\" to {}".format(config["name"],
 			config["commands"][command])
-		return osascript.osascript(fullCommand)
+		result = subprocess.run(("osascript", "-e", fullCommand),
+			stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+
+		return (result.returncode, result.stdout.decode("utf-8").rstrip(),
+			result.stderr.decode("utf-8").rstrip())
 
 	def isPlaying(self):
 		playerStates = self.getCurrentConfig()["player-states"]
@@ -74,10 +78,13 @@ class _TrackController():
 			return result[2]
 	
 	def getSystemVolume(self):
-		return osascript.osascript("output volume of (get volume settings)")[1]
+		result = subprocess.run(("osascript", "-e",
+			"output volume of (get volume settings)"), stdout = subprocess.PIPE)
+		return int(result.stdout.decode("utf-8").rstrip())
 	
 	def setSystemVolume(self, volume):
-		osascript.osascript("set volume output volume {}".format(volume))
+		subprocess.run(("osascript", "-e",
+			"set volume output volume {}".format(volume)))
 
 class _TrackChecker():
 	def __init__(self, interval = 5):
