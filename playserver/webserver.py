@@ -12,7 +12,6 @@ STATIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../static
 #Intialize Flask App
 app = flask.Flask(__name__, template_folder = TEMPLATE_PATH, static_folder = STATIC_PATH)
 
-
 @app.before_first_request
 def startSocketServer():
 	loop = asyncio.get_event_loop()
@@ -73,7 +72,7 @@ def getApplication():
 
 @app.route("/get_system_volume")
 def getSystemVolume():
-	return track.controller.getSystemVolume()
+	return str(track.controller.getSystemVolume())
 
 @app.route("/set_system_volume", methods = ["POST"])
 def setSystemVolume():
