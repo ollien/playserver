@@ -24,7 +24,7 @@ def startSocketServer():
 #Begin Flask routes
 @app.route("/")
 def root():
-	return flask.render_template("index.html")
+	return flask.render_template("index.html", wsport = globalconfig.config["websocket-port"])
 
 @app.route("/get_song_info")
 def getSongInfo():

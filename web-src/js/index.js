@@ -11,9 +11,11 @@ document.addEventListener("DOMContentLoaded", function(event){
 	var playerSelect = document.getElementById("player-select");
 	//Volume slider
 	var volumeSlider = document.getElementById("volume-slider");
+	//Get the port from the wsport element in the template
+	var websocketPort = document.getElementById("wsport").textContent;
 
 	var playing = false;
-	var ws = new WebSocket("ws://" + window.location.hostname + ":5001");
+	var ws = new WebSocket("ws://" + window.location.hostname + ":" + websocketPort);
 
 
 	function updateInfo(data) { 
