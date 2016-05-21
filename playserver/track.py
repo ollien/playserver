@@ -1,12 +1,13 @@
 import subprocess
 from threading import Timer
 from . import configmanager
+from . import globalconfig
 
 APP_CONFIG_PATH = "applications/"
 
 class _TrackController():
 	
-	def __init__(self, application = "radiant"):
+	def __init__(self, application = globalconfig.config["default-player"]):
 		self.currentApplication = application
 		self._applicationConfigs = configmanager.ConfigManager(APP_CONFIG_PATH)
 
