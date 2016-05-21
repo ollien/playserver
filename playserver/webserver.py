@@ -5,6 +5,7 @@ import asyncio
 import threading
 from . import track
 from . import tracksocketserver
+from . import globalconfig
 
 TEMPLATE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../templates"))
 STATIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../static"))
@@ -15,7 +16,8 @@ app = flask.Flask(__name__, template_folder = TEMPLATE_PATH, static_folder = STA
 @app.before_first_request
 def startSocketServer():
 	loop = asyncio.get_event_loop()
-	socketServ = tracksocketserver.TrackSocketServer(loop, host = "0.0.0.0")
+	socketServ = tracksocketserver.TrackSocketServer(loop, 
+		host = globalconfig.config["host"], port = globalconfig.config["websocket-port"])
 	socketThread = threading.Thread(None, socketServ.run)
 	socketThread.start()
 

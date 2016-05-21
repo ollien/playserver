@@ -1,4 +1,4 @@
-from . import configreader
+from . import configmanager
 
-_reader = configreader.ConfigReader(configPath = "../config")
+_reader = configmanager.ConfigManager(configPath = "config/")
 config = _reader["config"]

@@ -1,6 +1,6 @@
 {
-	host: "0.0.0.0",
-	webserver-port: "5000",
-	websocket-port: "5001",
-	default-player: "radiant"
+	"host": "0.0.0.0",
+	"webserver-port": "5000",
+	"websocket-port": "5001",
+	"default-player": "radiant"
 }

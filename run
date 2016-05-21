@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 from playserver import webserver
+from playserver import globalconfig
 
 if __name__ == "__main__":
-	webserver.app.run(host = "0.0.0.0")
+	webserver.app.run(host = globalconfig.config["host"], 
+		port = globalconfig.config["webserver-port"])
